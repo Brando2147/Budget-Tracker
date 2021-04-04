@@ -1,8 +1,14 @@
-const FILES_TO_CACHE = ["/"];
+const FILES_TO_CACHE = ["/" "/",
+"/index.html",
+'/index.js',
+"/style.css",
+"manifest.webmanifest",
+];
 
-const PRECACHE = "precache-v1";
-const RUNTIME = "runtime";
+const CACHE_NAME = "static-cache-v2";
+const DATA_CACHE_NAME = "data-cache-v1";
 
+// Installing service worker
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches
@@ -34,6 +40,7 @@ self.addEventListener("activate", (event) => {
   );
 });
 
+// Fetch 
 self.addEventListener("fetch", (event) => {
   if (event.request.url.startsWith(self.location.origin)) {
     event.respondWith(
